@@ -1,15 +1,11 @@
 import React from "react";
 import noImage from "../../Assets/noImage.png";
-import { Card, Image, Box, Text, Heading, Tag, TagLabel, ButtonGroup, Button } from "@chakra-ui/react";
+import { Card, Image, Box, Text, Heading, Tag, TagLabel, ButtonGroup, Button, Divider, Center } from "@chakra-ui/react";
 import { CapitalizeFirstLetter } from "../../Helpers/StringFunction";
 import { PokemonColor } from "../../Helpers/PokemonColor";
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
-import { useNavigate } from "react-router-dom";
 
-
-function RectangleCard(props) {
-    const navigate = useNavigate();
-
+function RectangleVerticleLine(props) {
 
     return (
         <Card
@@ -20,10 +16,10 @@ function RectangleCard(props) {
             bgColor="#0E1F40"
             p="5"
             rounded={"xl"}
+            gap={"10px"}
         >
 
-            <Box mx="4px" w="30%">
-
+            <Box mx="4px" w="28%" >
                 <Image
                     objectFit="cover"
                     src={
@@ -33,16 +29,15 @@ function RectangleCard(props) {
                     h="100px"
                     alt="Pokemon"
                     cursor="pointer"
-                    onClick={() => navigate(`/detail/${props.pokemondata?.id}`)}
-                    _hover={{ transform: 'scale(1.1)' }}
                 />
             </Box>
+            <Center h="200px">
+                <Divider orientation='vertical' />
+            </Center>
 
-
-            <Box width={"70%"} ml={2}>
-                <Heading w={"fit-content"} cursor={"pointer"} _hover={{ textDecoration: "underline" }} onClick={() => navigate(`/detail/${props.pokemondata?.id}`)} size='md' mb='2'>{CapitalizeFirstLetter(props.pokemon?.name)}</Heading>
-
-                <Box>
+            <Box width={"68%"} ml={2}>
+                <Heading size='md' mb='2'>{CapitalizeFirstLetter(props.pokemon?.name)}</Heading>
+                <Box mb={'3'}>
                     {
                         props.pokemon?.types?.map((val) => {
                             return (
@@ -54,13 +49,20 @@ function RectangleCard(props) {
                     }
                 </Box>
 
-                <ButtonGroup justifyContent={"flex-end"} mt='2' w='full'>
 
-                    <Button _hover={{ transform: 'scale(1.2)' }} _active={"none"} color='white' bgColor='inherit'>
+                <Text mb="1" fontSize={"sm"} fontWeight={"bold"}>Weight : {props.pokemon?.weight / 10} kg</Text>
+                <Text mb="1" fontSize={"sm"} fontWeight={"bold"}>Height : {props.pokemon?.height / 10} m</Text>
+                <Text fontSize={"sm"} fontWeight={"bold"}>Abilities : {props.pokemon?.abilities.map((val, idx) => {
+                    return (
+                        <span>{idx == props.pokemon?.abilities.length - 1 ? CapitalizeFirstLetter(val?.ability?.name) : CapitalizeFirstLetter(val?.ability?.name) + ","} </span>
+                    )
+                })} </Text>
+
+
+
+                <ButtonGroup justifyContent={"flex-end"} mt='2' w='full'>
+                    <Button size={"xs"} _hover={{ transform: 'scale(1.2)' }} _active={"none"} color='white' bgColor='inherit'>
                         <AiOutlineHeart style={{ color: 'white', fontSize: '18px' }} />
-                    </Button>
-                    <Button style={{ transition: "all 0.2s ease 0s" }} variant={"outline"} border={"2px"} borderColor={"Yellow"} _active='none' bgColor='inherit' rounded='lg' textColor={'white'} _hover={{ transition: "all 0.2s ease 0s", borderColor: "#FF7A2E", textDecoration: "underline" }} onClick={() => navigate(`/detail/${props.pokemon?.id}`)}>
-                        <Text fontSize={'sm'} fontWeight={"bold"}>View Details</Text>
                     </Button>
                 </ButtonGroup>
 
@@ -71,4 +73,4 @@ function RectangleCard(props) {
     );
 }
 
-export default RectangleCard;
+export default RectangleVerticleLine;

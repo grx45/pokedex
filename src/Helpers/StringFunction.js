@@ -7,3 +7,7 @@ export const CapitalizeFirstLetter = (name) => {
 
   return null;
 };
+
+export const ReplaceSpecial = (text) => {
+  return text.replace("special-", "sp. ");
+};

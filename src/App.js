@@ -4,6 +4,7 @@ import SplashPage from "./Pages/InitailLoading/SplashPage";
 import { Container } from "@chakra-ui/react";
 import { Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home/Home";
+import Detail from "./Pages/Detail/Detail";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -22,6 +23,7 @@ function App() {
         <>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/detail/:id" element={<Detail />} />
           </Routes>
         </>
       )}
