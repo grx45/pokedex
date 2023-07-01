@@ -6,6 +6,8 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home/Home";
 import Detail from "./Pages/Detail/Detail";
 import FooterBar from "./Components/FooterBar/FooterBar";
+import Favourite from "./Pages/Favourite/Favourite";
+import NotFound from "./Pages/NotFound/NotFound";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -25,6 +27,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/detail/:id" element={<Detail />} />
+            <Route path="/favourite" element={<Favourite />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
           <FooterBar />
         </>

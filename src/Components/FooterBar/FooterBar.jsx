@@ -13,6 +13,18 @@ function FooterBar() {
 
     const [visible, setVisible] = useState(false)
 
+    let showFooter;
+
+    if (location.pathname === '/') {
+        showFooter = true
+    } else if (location.pathname.includes('/detail')) {
+        showFooter = true
+    } else if (location.pathname === '/favourite') {
+        showFooter = true
+    } else {
+        showFooter = false
+    }
+
     document.addEventListener('scroll', () => {
         const VerticalHeight = window.scrollY    // Getting vertical scrollbar position
         if (VerticalHeight !== 0) {
@@ -36,7 +48,7 @@ function FooterBar() {
     }
 
     return (
-        <Flex w={"full"} justifyContent={"center"} position={"relative"}>
+        <Flex w={"full"} justifyContent={"center"} position={"relative"} display={showFooter ? "flex" : "none"}>
             <Flex border={"1px"} borderColor={"gray.500"} rounded={"xl"} bgColor={'#0E1F40'} shadow='2xl' position='fixed' bottom={'5'} justifyContent='space-evenly' w={{ base: '75%', sm: '350px', md: '350px' }} py='2'>
                 <Button _hover={{ transform: 'scale(1.2)' }} _active='none' bgColor={'#0E1F40'} py='7' onClick={NavigateToHome} >
                     <Flex flexDir={"column"} alignItems={"center"}>
