@@ -4,7 +4,7 @@ import { FetchPokemonDetail } from "../../Hooks/FetchPokemonDetail";
 import { FetchAllPokemonQuery } from "../../Hooks/FetchAllPokemon";
 import { useEffect } from "react";
 import SmallSquareCard from "../../Components/Cards/SmallSquareCard";
-
+import { ScrollToTop } from "../../Helpers/ScrollToTop";
 
 
 function Home() {
@@ -37,7 +37,7 @@ function Home() {
     }, []);
 
     useEffect(() => {
-        window.scrollTo(0, 0);
+        ScrollToTop()
     }, [])
 
 

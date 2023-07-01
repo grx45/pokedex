@@ -5,7 +5,9 @@ import { FaLessThan } from 'react-icons/fa';
 import { CapitalizeFirstLetter, ReplaceSpecial } from "../../Helpers/StringFunction";
 import RectangleVerticleLine from "../../Components/Cards/RectangleVertivalLine";
 import Toast from "../../Components/Toast/Toast"
+
 import { useEffect } from "react";
+import { ScrollToTop } from "../../Helpers/ScrollToTop";
 
 
 
@@ -23,7 +25,7 @@ function Detail() {
 
 
     useEffect(() => {
-        window.scrollTo(0, 0);
+        ScrollToTop()
     }, [])
 
     return (
