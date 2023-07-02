@@ -5,7 +5,7 @@ import { FetchAllPokemonQuery } from "../../Hooks/FetchAllPokemon";
 import { useEffect } from "react";
 import SmallSquareCard from "../../Components/Cards/SmallSquareCard";
 import { ScrollToTop } from "../../Helpers/ScrollToTop";
-
+import Toast from "../../Components/Toast/Toast";
 
 function Home() {
     const {
@@ -15,11 +15,11 @@ function Home() {
         error: errorPokemon,
     } = FetchPokemonDetail(10, true);
 
-    const { data: allPokemons,
+    const {
+        data: allPokemons,
         error: allPokemonsError,
         fetchNextPage,
         isFetching,
-        isFetchingNextPage,
     } = FetchAllPokemonQuery();
 
     useEffect(() => {
@@ -39,12 +39,6 @@ function Home() {
     useEffect(() => {
         ScrollToTop()
     }, [])
-
-
-
-
-
-
 
     return (
         <Box id="PageContainer" bgColor={"#F2F2F2"} px="8">
@@ -81,7 +75,6 @@ function Home() {
                     </SimpleGrid>
                 </Box>
 
-
             </Box>
             {isFetching && allPokemons ?
                 <Flex w="full" justifyContent="center"
@@ -90,6 +83,8 @@ function Home() {
                         speed='0.65s' color="#0E1F40" size={"xl"} />
                 </Flex>
                 : null}
+            {!isErrorPokemon ? null : <Toast title={'error'} description={isErrorPokemon.message} status={"error"} />}
+            {!allPokemonsError ? null : <Toast title={'error'} description={allPokemonsError.message} status={"error"} />}
         </Box>
     );
 }
