@@ -49,7 +49,6 @@ function RectangleVerticleLine(props) {
                     }
                 </Box>
 
-
                 <Text mb="1" fontSize={"sm"} fontWeight={"bold"}>Weight : {props.pokemon?.weight / 10} kg</Text>
                 <Text mb="1" fontSize={"sm"} fontWeight={"bold"}>Height : {props.pokemon?.height / 10} m</Text>
                 <Text fontSize={"sm"} fontWeight={"bold"}>Abilities : {props.pokemon?.abilities.map((val, idx) => {
@@ -57,16 +56,11 @@ function RectangleVerticleLine(props) {
                         <span>{idx == props.pokemon?.abilities.length - 1 ? CapitalizeFirstLetter(val?.ability?.name) : CapitalizeFirstLetter(val?.ability?.name) + ","} </span>
                     )
                 })} </Text>
-
-
-
                 <ButtonGroup justifyContent={"flex-end"} mt='2' w='full'>
                     <Button size={"xs"} _hover={{ transform: 'scale(1.2)' }} _active={"none"} color='white' bgColor='inherit'>
                         <AiOutlineHeart style={{ color: 'white', fontSize: '18px' }} />
                     </Button>
                 </ButtonGroup>
-
-
 
             </Box>
         </Card >

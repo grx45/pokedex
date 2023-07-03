@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import { PokemonClient } from "../Helpers/Axios";
-import { useSelector } from "react-redux";
 
 export const FetchFavouritePokemon = (data) => {
   return useQuery({

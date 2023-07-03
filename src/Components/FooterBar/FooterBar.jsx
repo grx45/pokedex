@@ -1,15 +1,17 @@
-import { Box, Button, Flex, IconButton, Text } from "@chakra-ui/react";
+import { Badge, Box, Button, Flex, IconButton, Text } from "@chakra-ui/react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { TbPokeball } from 'react-icons/tb';
 import { BsFillBookmarkFill, BsArrowUpCircle } from 'react-icons/bs';
 import { BiUpArrowCircle } from 'react-icons/bi';
 import { useState } from "react";
 import { ScrollToTop } from "../../Helpers/ScrollToTop";
+import { useSelector } from "react-redux";
 
 
 function FooterBar() {
     const navigate = useNavigate();
     const location = useLocation();
+    const favouriteList = useSelector((state) => state.favouriteReducer.data);
 
     const [visible, setVisible] = useState(false)
 
@@ -34,9 +36,6 @@ function FooterBar() {
         }
     })
 
-
-
-
     function NavigateToHome() {
         navigate("/");
         ScrollToTop();
@@ -59,6 +58,7 @@ function FooterBar() {
 
                 <Button _hover={{ transform: 'scale(1.2)' }} _active='none' bgColor={'#0E1F40'} py='7' onClick={NavigateFavourite} >
                     <Flex flexDir={"column"} alignItems={"center"}>
+                        <Badge pos={"absolute"} right='6' top='-0.5' bgColor={'red'} color='white' rounded={'full'} fontSize={"13px"}>{favouriteList.length}</Badge>
                         <BsFillBookmarkFill fontSize={"35"} color={location.pathname === "/favourite" ? "white" : "gray"} />
                         <Text fontSize={"xs"} color={location.pathname === "/favourite" ? "white" : "gray"} >Favourites</Text>
                     </Flex>

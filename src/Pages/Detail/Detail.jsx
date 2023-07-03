@@ -8,8 +8,6 @@ import Toast from "../../Components/Toast/Toast"
 import { useEffect } from "react";
 import { ScrollToTop } from "../../Helpers/ScrollToTop";
 
-
-
 function Detail() {
 
     const params = useParams();
@@ -21,7 +19,6 @@ function Detail() {
         isError,
         error
     } = FetchPokemonDetail(params.id);
-
 
     useEffect(() => {
         ScrollToTop()

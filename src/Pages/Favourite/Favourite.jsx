@@ -1,19 +1,13 @@
-import { useNavigate, useParams } from "react-router-dom";
-import { FetchPokemonDetail } from "../../Hooks/FetchPokemonDetail";
 import { Box, Heading, Skeleton, Text } from "@chakra-ui/react";
-import { FaLessThan } from 'react-icons/fa';
-import { CapitalizeFirstLetter, ReplaceSpecial } from "../../Helpers/StringFunction";
-import RectangleVerticleLine from "../../Components/Cards/RectangleVertivalLine";
+import { CapitalizeFirstLetter } from "../../Helpers/StringFunction";
 import Toast from "../../Components/Toast/Toast"
 import { useEffect } from "react";
-import { ScrollToTop } from "../../Helpers/ScrollToTop";
 import FavouriteCard from "../../Components/Cards/FavouriteCard";
 import { FetchFavouritePokemon } from "../../Hooks/FetchFavouritePokemon";
-import { FavouriteReducerData } from "../../Helpers/DataFromReducer";
+import { useSelector } from "react-redux";
 
 function Favourite() {
-
-    const favouritePokemonList = FavouriteReducerData();
+    const favouritePokemonList = useSelector((state) => state.favouriteReducer.data);
 
     const {
         data,
@@ -23,7 +17,7 @@ function Favourite() {
         error,
     } = FetchFavouritePokemon(favouritePokemonList);
 
-    console.log(data)
+    console.log("data", data)
 
     useEffect(() => {
         if (favouritePokemonList) {
@@ -47,11 +41,7 @@ function Favourite() {
                     </Skeleton>
                 )
             })}
-
-            <FavouriteCard />
-
-            <Text textAlign={"center"} color={"black"}> There are number pokemon in your favourites list</Text>
-
+            <Text textAlign={"center"} color={"black"}> There are {favouritePokemonList.length} pokemon in your favourites list</Text>
         </Box>
     );
 }

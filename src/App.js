@@ -8,35 +8,20 @@ import Detail from "./Pages/Detail/Detail";
 import FooterBar from "./Components/FooterBar/FooterBar";
 import Favourite from "./Pages/Favourite/Favourite";
 import NotFound from "./Pages/NotFound/NotFound";
-import { useDispatch } from "react-redux";
-import { db } from "./lib/Firebaseinit";
-import { collection, getDocs } from "firebase/firestore";
-import { favouriteAction } from "./reducers/favourite";
+import { useFavouritePokemon } from "./Helpers/GetFavouritePokemon";
 
 function App() {
-  const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
-  const [favouriteList, setFavouriteList] = useState([]);
-
-  const getFavouritePokemon = async () => {
-    const collectionRef = collection(db, "favourites");
-    const dataFromFirebase = await getDocs(collectionRef);
-    const result = dataFromFirebase.docs.map((doc) => ({
-      ...doc.data(),
-      id: doc.id,
-    }));
-    setFavouriteList(result);
-    dispatch(favouriteAction(result));
-  };
+  const { favouriteList, getAndUpdateFavouritePokemon } = useFavouritePokemon();
 
   useEffect(() => {
-    getFavouritePokemon();
-  }, []);
-
-  useEffect(() => {
+    const fetchData = async () => {
+      await getAndUpdateFavouritePokemon();
+    };
     setTimeout(() => {
       setIsLoading(false);
     }, 2500);
+    fetchData();
   }, []);
 
   return (
