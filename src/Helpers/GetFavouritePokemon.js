@@ -18,5 +18,5 @@ export const useFavouritePokemon = () => {
     setFavouriteList(result);
     dispatch(favouriteAction(result));
   };
-  return { favouriteList, getAndUpdateFavouritePokemon };
+  return { getAndUpdateFavouritePokemon };
 };

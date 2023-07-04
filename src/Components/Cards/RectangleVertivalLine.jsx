@@ -4,8 +4,17 @@ import { Card, Image, Box, Text, Heading, Tag, TagLabel, ButtonGroup, Button, Di
 import { CapitalizeFirstLetter } from "../../Helpers/StringFunction";
 import { PokemonColor } from "../../Helpers/PokemonColor";
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import Toast from "../Toast/Toast";
+import { UpdateFavoritePokemon } from "../../Hooks/UpdateFavoritePokemon";
+import { useSelector } from "react-redux";
+import { likeFilter } from "../../Helpers/CheckIsLiked";
+
 
 function RectangleVerticleLine(props) {
+
+    const favouritePokemonList = useSelector((state) => state.favouriteReducer.data);
+    const { onBtnLike, likeLoading, unlikeLoading, iserror, errorMessage } = UpdateFavoritePokemon()
+    const filterResult = likeFilter(favouritePokemonList, props.pokemon?.id)
 
     return (
         <Card
@@ -57,12 +66,16 @@ function RectangleVerticleLine(props) {
                     )
                 })} </Text>
                 <ButtonGroup justifyContent={"flex-end"} mt='2' w='full'>
-                    <Button size={"xs"} _hover={{ transform: 'scale(1.2)' }} _active={"none"} color='white' bgColor='inherit'>
-                        <AiOutlineHeart style={{ color: 'white', fontSize: '18px' }} />
+                    <Button size={"xs"} _hover={{ transform: 'scale(1.2)' }} _active={"none"} color='white' bgColor='inherit' isLoading={likeLoading || unlikeLoading ? true : false} onClick={() => onBtnLike(props.pokemon?.id)}>
+                        {
+                            filterResult.length == 0 ? <AiOutlineHeart style={{ color: 'white', fontSize: '18px' }} /> : <AiFillHeart style={{ color: 'red', fontSize: '18px' }} />
+                        }
                     </Button>
                 </ButtonGroup>
 
             </Box>
+
+            {!iserror ? null : <Toast title="Error" description={errorMessage} status="error" />}
         </Card >
     );
 }

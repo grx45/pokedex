@@ -17,8 +17,6 @@ function Favourite() {
         error,
     } = FetchFavouritePokemon(favouritePokemonList);
 
-    console.log("data", data)
-
     useEffect(() => {
         if (favouritePokemonList) {
             refetch()
@@ -42,6 +40,7 @@ function Favourite() {
                 )
             })}
             <Text textAlign={"center"} color={"black"}> There are {favouritePokemonList.length} pokemon in your favourites list</Text>
+            {!isError ? null : <Toast title="Error" description={error.message} status="error" />}
         </Box>
     );
 }

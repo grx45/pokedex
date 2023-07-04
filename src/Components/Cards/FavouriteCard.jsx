@@ -6,13 +6,16 @@ import { PokemonColor } from "../../Helpers/PokemonColor";
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { useNavigate } from "react-router-dom";
 import { UpdateFavoritePokemon } from "../../Hooks/UpdateFavoritePokemon";
-
+import Toast from "../Toast/Toast";
+import { useSelector } from "react-redux";
+import { likeFilter } from "../../Helpers/CheckIsLiked";
 
 
 function FavouriteCard(props) {
     const navigate = useNavigate()
-
-    const { onBtnLike } = UpdateFavoritePokemon()
+    const favouritePokemonList = useSelector((state) => state.favouriteReducer.data);
+    const { onBtnLike, likeLoading, unlikeLoading, iserror, errorMessage } = UpdateFavoritePokemon()
+    const filterResult = likeFilter(favouritePokemonList, props.favouritedata?.id)
 
     return (
         <Card
@@ -59,7 +62,6 @@ function FavouriteCard(props) {
                     }
                 </Box>
 
-
                 <Text mb="1" fontSize={"sm"} fontWeight={"bold"}>Weight : {props.favouritedata?.weight / 10} kg</Text>
                 <Text mb="1" fontSize={"sm"} fontWeight={"bold"}>Height : {props.favouritedata?.height / 10} m</Text>
                 <Text fontSize={"sm"} fontWeight={"bold"}>Abilities : {props.favouritedata?.abilities.map((val, idx) => {
@@ -71,12 +73,15 @@ function FavouriteCard(props) {
 
 
                 <ButtonGroup justifyContent={"flex-end"} mt='2' w='full'>
-                    <Button size={"xs"} _hover={{ transform: 'scale(1.2)' }} _active={"none"} color='white' bgColor='inherit' onClick={() => onBtnLike(props.favouritedata?.id)}>
-                        <AiOutlineHeart style={{ color: 'white', fontSize: '18px' }} />
+                    <Button size={"xs"} _hover={{ transform: 'scale(1.2)' }} _active={"none"} color='white' bgColor='inherit' isLoading={likeLoading || unlikeLoading ? true : false} onClick={() => onBtnLike(props.favouritedata?.id)}>
+                        {
+                            filterResult.length == 0 ? <AiOutlineHeart style={{ color: 'white', fontSize: '18px' }} /> : <AiFillHeart style={{ color: 'red', fontSize: '18px' }} />
+                        }
+
                     </Button>
                 </ButtonGroup>
 
-
+                {!iserror ? null : <Toast title="Error" description={errorMessage} status="error" />}
 
             </Box>
         </Card >

@@ -4,10 +4,10 @@ import { FetchPokemonDetail } from "../../Hooks/FetchPokemonDetail";
 import { FetchAllPokemonQuery } from "../../Hooks/FetchAllPokemon";
 import { useEffect } from "react";
 import SmallSquareCard from "../../Components/Cards/SmallSquareCard";
-import { ScrollToTop } from "../../Helpers/ScrollToTop";
 import Toast from "../../Components/Toast/Toast";
 
 function Home() {
+
     const {
         data: pokemon,
         isLoading: isLoadingPokemon,
@@ -37,7 +37,7 @@ function Home() {
     }, []);
 
     useEffect(() => {
-        ScrollToTop()
+        window.scrollTo(0, 0);
     }, [])
 
     return (
