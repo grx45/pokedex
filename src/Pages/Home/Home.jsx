@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, SimpleGrid, Skeleton, Spinner } from "@chakra-ui/react";
+import { Box, Heading, SimpleGrid, Skeleton } from "@chakra-ui/react";
 import RectangleCard from "../../Components/Cards/RectangleCard";
 import { FetchPokemonDetail } from "../../Hooks/FetchPokemonDetail";
 import { FetchAllPokemonQuery } from "../../Hooks/FetchAllPokemon";
@@ -6,13 +6,13 @@ import { useEffect } from "react";
 import SmallSquareCard from "../../Components/Cards/SmallSquareCard";
 import Toast from "../../Components/Toast/Toast";
 
+
 function Home() {
 
     const {
         data: pokemon,
         isLoading: isLoadingPokemon,
         isError: isErrorPokemon,
-        error: errorPokemon,
     } = FetchPokemonDetail(10, true);
 
     const {
@@ -72,17 +72,14 @@ function Home() {
                                 })
                             })
                         }
+                        {
+                            isFetching && allPokemons ? (<>
+                                <Skeleton height={"190px"} rounded='xl' />
+                                <Skeleton height={"190px"} rounded='xl' /></>) : null
+                        }
                     </SimpleGrid>
                 </Box>
-
             </Box>
-            {isFetching && allPokemons ?
-                <Flex w="full" justifyContent="center"
-                    alignItems="center" >
-                    <Spinner thickness='5px'
-                        speed='0.65s' color="#0E1F40" size={"xl"} />
-                </Flex>
-                : null}
             {!isErrorPokemon ? null : <Toast title={'error'} description={isErrorPokemon.message} status={"error"} />}
             {!allPokemonsError ? null : <Toast title={'error'} description={allPokemonsError.message} status={"error"} />}
         </Box>

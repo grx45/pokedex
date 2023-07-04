@@ -1,11 +1,3 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -13,26 +5,15 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.small-square-card{
+  animation: card-load 0.5s ease-in;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
+@keyframes card-load {
   from {
-    transform: rotate(0deg);
+    transform: translateY(150%)
   }
   to {
-    transform: rotate(360deg);
+    transform: translateY(0);
   }
 }

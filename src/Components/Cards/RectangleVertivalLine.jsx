@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { likeFilter } from "../../Helpers/CheckIsLiked";
 
 
+
 function RectangleVerticleLine(props) {
 
     const favouritePokemonList = useSelector((state) => state.favouriteReducer.data);

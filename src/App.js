@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import "./App.css";
 import SplashPage from "./Pages/InitailLoading/SplashPage";
 import { Container } from "@chakra-ui/react";
 import { Route, Routes } from "react-router-dom";
@@ -12,7 +11,7 @@ import { useFavouritePokemon } from "./Helpers/GetFavouritePokemon";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
-  const { favouriteList, getAndUpdateFavouritePokemon } = useFavouritePokemon();
+  const { getAndUpdateFavouritePokemon } = useFavouritePokemon();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,7 +19,7 @@ function App() {
     };
     setTimeout(() => {
       setIsLoading(false);
-    }, 2500);
+    }, 0);
     fetchData();
   }, []);
 

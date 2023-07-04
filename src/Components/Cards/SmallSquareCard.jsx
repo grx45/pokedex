@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, Card, Heading, Image, Stack } from '@chakra-ui/react';
+import { Button, ButtonGroup, Card, Heading, Image } from '@chakra-ui/react';
 import React from 'react';
 import { AiFillHeart, AiFillInfoCircle, AiOutlineHeart } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
@@ -7,7 +7,7 @@ import Toast from '../Toast/Toast';
 import { UpdateFavoritePokemon } from '../../Hooks/UpdateFavoritePokemon';
 import { useSelector } from "react-redux";
 import { likeFilter } from '../../Helpers/CheckIsLiked';
-
+import "../../App.css"
 
 
 function SmallSquareCard(props) {
@@ -19,7 +19,7 @@ function SmallSquareCard(props) {
 
 
     return (
-        <Card
+        <Card className='small-square-card'
             justifyContent={"center"}
             alignItems={"center"}
             rounded='xl'
